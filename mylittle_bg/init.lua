@@ -76,7 +76,8 @@ minetest.register_node("mylittle_bg:"..item,{
 end
 minetest.register_node("mylittle_bg:board",{
 	description = "Little Board Game",
-	tiles = {"default_coal_block.png^default_snowball.png"},
+	inventory_image = "mylittle_bg_inven.png",
+	tiles = {"mylittle_bg_inven.png"},
 	drawtype = "normal",
 	paramtype = "light",
 	light_source = 8,
