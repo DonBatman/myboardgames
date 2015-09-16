@@ -80,7 +80,7 @@ minetest.register_node(item, {
 	drawtype = "normal",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {cracky = 3, dig_immediate=3,not_in_creative_inventory=1},
+	groups = {cracky = 3,not_in_creative_inventory=1},
 })
 end
 

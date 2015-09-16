@@ -33,7 +33,7 @@ minetest.register_node("myconnect4:red",{
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {cracky=3,dig_immediate=1,falling_node=1,not_in_creative_inventory=1},
+	groups = {cracky=3,dig_immediate=3,falling_node=1,not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -48,7 +48,7 @@ minetest.register_node("myconnect4:black",{
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {cracky=3,dig_immediate=1,falling_node=1,not_in_creative_inventory=1},
+	groups = {cracky=3,dig_immediate=3,falling_node=1,not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -64,7 +64,7 @@ minetest.register_node("myconnect4:redrf",{
 	paramtype = "light",
 	paramtype2 = "facedir",
 	drop = "myconnect4:red",
-	groups = {cracky=3,dig_immediate=1,falling_node=1,not_in_creative_inventory=1},
+	groups = {cracky=3,dig_immediate=3,falling_node=1,not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -83,7 +83,7 @@ minetest.register_node("myconnect4:blackrf",{
 	paramtype = "light",
 	paramtype2 = "facedir",
 	drop = "myconnect4:black",
-	groups = {cracky=3,dig_immediate=1,falling_node=1,not_in_creative_inventory=1},
+	groups = {cracky=3,dig_immediate=3,falling_node=1,not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
 		fixed = {
