@@ -1,5 +1,6 @@
 local nici = 1
 local cardsplayed = {}
+local rplayers = {}
 local sbox1 = {
 		type = "fixed",
 		fixed = {
@@ -20,22 +21,29 @@ function apn(pos, placer, itemstack, pointed_thing)
 	local descr = minetest.registered_items[node]["description"]
 	local timer = minetest.get_node_timer({x=pos.x,y=pos.y-1,z=pos.z})
 
+	for index, player in ipairs(minetest.get_objects_inside_radius(pos,10)) do
+		local target_name = player:get_player_name()
+			table.insert(rplayers, target_name)
+			print(rplayers)
+	
+
+
 	if grop == 0 then
 		minetest.set_node(pos,{name = "air"})
 		minetest.chat_send_player( name,"You can not place a card there!")
 		return itemstack
 	elseif grop == 1 then
-		minetest.chat_send_all( name.." placed a "..descr)
+		minetest.chat_send_player(target_name, name.." placed a "..descr)
 	elseif grop == 2 then
 			minetest.set_node(pos,{name = "air"})
 			minetest.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name = node,param2=par})
-			minetest.chat_send_all(name.." placed a "..descr)
+			minetest.chat_send_player(target_name, name.." placed a "..descr)
 	elseif grop ==3 then
 		minetest.set_node(pos,{name = "air"})
 		minetest.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name = node,param2=par})		
 	return itemstack
 	end
-
+end
 end
 
 for nu = 1,13 do
