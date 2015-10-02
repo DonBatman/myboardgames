@@ -20,7 +20,7 @@ minetest.register_node("mydiamondblock:blue"..blue,{
 	drawtype = "normal",
 	paramtype = "light",
 	light_source = 8,
-	groups = {cracky = 1},
+	groups = {cracky = 1,not_in_creative_inventory=1},
 })
 end
 for browns = 1,4 do
@@ -32,6 +32,6 @@ minetest.register_node("mydiamondblock:brown"..brown,{
 	drawtype = "normal",
 	paramtype = "light",
 	light_source = 8,
-	groups = {cracky = 1},
+	groups = {cracky = 1,not_in_creative_inventory=1},
 })
 end
