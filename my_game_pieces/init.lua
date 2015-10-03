@@ -1,56 +1,29 @@
 local dice = {
-	{"my_game_pieces:1",
-		{"my_game_pieces_1.png",
-		"my_game_pieces_2.png",
-		"my_game_pieces_3.png",
-		"my_game_pieces_4.png",
-		"my_game_pieces_5.png",
-		"my_game_pieces_6.png"},"1",1},
-	{"my_game_pieces:2",
-		{"my_game_pieces_2.png",
-		"my_game_pieces_3.png",
-		"my_game_pieces_4.png",
-		"my_game_pieces_5.png",
-		"my_game_pieces_6.png",
-		"my_game_pieces_1.png"},"2",1},
-	{"my_game_pieces:3",
-		{"my_game_pieces_3.png",
-		"my_game_pieces_4.png",
-		"my_game_pieces_5.png",
-		"my_game_pieces_6.png",
-		"my_game_pieces_1.png",
-		"my_game_pieces_2.png"},"3",0},
-	{"my_game_pieces:4",
-		{"my_game_pieces_4.png",
-		"my_game_pieces_5.png",
-		"my_game_pieces_6.png",
-		"my_game_pieces_1.png",
-		"my_game_pieces_2.png",
-		"my_game_pieces_3.png"},"4",1},
-	{"my_game_pieces:5",
-		{"my_game_pieces_5.png",
-		"my_game_pieces_6.png",
-		"my_game_pieces_1.png",
-		"my_game_pieces_2.png",
-		"my_game_pieces_3.png",
-		"my_game_pieces_4.png"},"5",1},
-	{"my_game_pieces:6",
-		{"my_game_pieces_6.png",
-		"my_game_pieces_1.png",
-		"my_game_pieces_2.png",
-		"my_game_pieces_3.png",
-		"my_game_pieces_4.png",
-		"my_game_pieces_5.png"},"6",1},
+	{"1","1","2","3","4","5","6",1},
+	{"2","2","3","4","5","6","1",1},
+	{"3","3","4","5","6","1","2",0},
+	{"4","4","5","6","1","2","3",1},
+	{"5","5","6","1","2","3","4",1},
+	{"6","6","1","2","3","4","5",1},
 	}
 for i in ipairs (dice) do
 local d1 = dice [i][1]
-local d2 = dice [i][2]
-local d3 = dice [i][3]
-local nici = dice [i][4]
+local i1 = dice [i][2]
+local i2 = dice [i][3]
+local i3 = dice [i][4]
+local i4 = dice [i][5]
+local i5 = dice [i][6]
+local i6 = dice [i][7]
+local nici = dice [i][8]
 
-minetest.register_node(d1,{
-	description = d3,
-	tiles = d2,
+minetest.register_node("my_game_pieces:dice_"..d1,{
+	description = "Dice",
+	tiles = {"my_game_pieces_"..i1..".png",
+		"my_game_pieces_"..i2..".png",
+		"my_game_pieces_"..i3..".png",
+		"my_game_pieces_"..i4..".png",
+		"my_game_pieces_"..i5..".png",
+		"my_game_pieces_"..i6..".png"},
 	drawtype = "normal",
 	paramtype = "light",
 	groups = {dig_immediate=3, not_in_creative_inventory=nici},
@@ -79,7 +52,7 @@ minetest.register_node("my_game_pieces:roll",{
 
 on_timer = function(pos, elapsed)
 	local ran = math.random(1,6)
-	minetest.set_node(pos,{name="my_game_pieces:"..ran})
+	minetest.set_node(pos,{name="my_game_pieces:dice_"..ran})
 end
 })
 local pieces = {
