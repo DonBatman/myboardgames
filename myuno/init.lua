@@ -1,6 +1,66 @@
 local nici = 1
-local cardsplayed = {}
+local lastcard = nil
 local rplayers = {}
+
+local function inform_near_players(pos, msg)
+	for _,player in pairs(minetest.get_objects_inside_radius(pos, 10)) do
+		if player:is_player() then
+			minetest.chat_send_player(player:get_player_name(), msg)
+		end
+	end
+end
+
+function apn(pos, placer, itemstack)
+	local grop = minetest.get_item_group(minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name, "myuno")
+	if grop > 3 then
+		return
+	end
+	
+	local name = placer:get_player_name()
+	if grop == 0 then
+		minetest.chat_send_player(name, "You can not place a card there!")
+		minetest.remove_node(pos)
+		return itemstack
+	end
+
+	local node = minetest.get_node(pos)
+	local nodeu = minetest.get_node({x=pos.x,y=pos.y-1,z=pos.z})
+	local descr = minetest.registered_items[node.name].description
+	if grop == 1 then
+		inform_near_players(pos, name.." placed a "..descr)
+		return
+	end
+	lastcard = nodeu.name
+	minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z}, node)
+	minetest.remove_node(pos)
+	if grop == 3 then
+		return itemstack
+	end
+	print(node.name)
+		
+
+	inform_near_players(pos, name.." placed a "..descr)
+
+end
+
+function od(pos, node, player, pointed_thing)
+	local node = minetest.get_node(pos)
+	local nn = node.name
+	local nodeu = minetest.get_node({x=pos.x,y=pos.y-1,z=pos.z})
+	local inv = player:get_inventory()
+	local lc = lastcard
+	print(nn)
+	print(lc)
+	
+	if lastcard ~= nil then
+		inv:add_item("main",nn)
+		minetest.set_node(pos, {name = lc})
+		lastcard = nil
+	else
+	return
+	end
+end
+
 local sbox1 = {
 		type = "fixed",
 		fixed = {
@@ -11,40 +71,6 @@ local sbox2 = {
 		fixed = {
 			{-0.3, -0.5, -0.45, 0.3, -0.3, 0.45}}
 		}
-
-function apn(pos, placer, itemstack, pointed_thing)
-	local name = placer:get_player_name();
-	local node = minetest.get_node(pos).name
-	local par = minetest.get_node(pos).param2
-	local nodeu = minetest.get_node({x=pos.x,y=pos.y-1,z=pos.z}).name
-	local grop = minetest.get_item_group(nodeu,"myuno")
-	local descr = minetest.registered_items[node]["description"]
-	local timer = minetest.get_node_timer({x=pos.x,y=pos.y-1,z=pos.z})
-
-	for index, player in ipairs(minetest.get_objects_inside_radius(pos,10)) do
-		local target_name = player:get_player_name()
-			table.insert(rplayers, target_name)
-			print(rplayers)
-	
-
-
-	if grop == 0 then
-		minetest.set_node(pos,{name = "air"})
-		minetest.chat_send_player( name,"You can not place a card there!")
-		return itemstack
-	elseif grop == 1 then
-		minetest.chat_send_player(target_name, name.." placed a "..descr)
-	elseif grop == 2 then
-			minetest.set_node(pos,{name = "air"})
-			minetest.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name = node,param2=par})
-			minetest.chat_send_player(target_name, name.." placed a "..descr)
-	elseif grop ==3 then
-		minetest.set_node(pos,{name = "air"})
-		minetest.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name = node,param2=par})		
-	return itemstack
-	end
-end
-end
 
 for nu = 1,13 do
 	local num = nu
@@ -91,7 +117,6 @@ else
 	desc2 = desc
 end	
 
-
 minetest.register_node("myuno:"..itm,{
 	description = desc2,
 	inventory_image = "myuno_color.png"..col.."^myuno_white.png^myuno_"..nimg..".png",
@@ -105,7 +130,7 @@ minetest.register_node("myuno:"..itm,{
 	selection_box = sbox1,
 	collision_box = sbox1,
 	after_place_node = apn,
-	
+	on_punch   = od,
 })
 
 	end
@@ -124,29 +149,39 @@ end
 	groups = {oddly_breakable_by_hand = 3,not_in_creative_inventory = nici,myuno=3},
 	selection_box = sbox1,
 	collision_box = sbox1,
-	on_construct = function(pos)
-		local meta = minetest.env:get_meta(pos)
-		meta:set_string("formspec",  
-			"size[4,4;]"..
-			"image_button_exit[0,0;2,2;myuno_form_red.png;red; ]"..
-			"image_button_exit[2,0;2,2;myuno_form_yellow.png;yellow; ]"..
-			"image_button_exit[0,2;2,2;myuno_form_blue.png;blue; ]"..
-			"image_button_exit[2,2;2,2;myuno_form_green.png;green; ]")
-	end,
-
-	on_receive_fields = function(pos, formname, fields, sender)
+	on_place = 	function(itemstack, placer, pointed_thing)
+	local pos = pointed_thing.above
+	local node = minetest.get_node(pos)
 	local meta = minetest.get_meta(pos)
+		minetest.show_formspec(placer:get_player_name(),"cform",
+				"size[4,4;]"..
+				"image_button_exit[0,0;2,2;myuno_form_red.png;red; ]"..
+				"image_button_exit[2,0;2,2;myuno_form_yellow.png;yellow; ]"..
+				"image_button_exit[0,2;2,2;myuno_form_blue.png;blue; ]"..
+				"image_button_exit[2,2;2,2;myuno_form_green.png;green; ]")
+		minetest.register_on_player_receive_fields(function(player, formname, fields)
+		if formname == "cform" then
 			if fields["red"] then
-				minetest.set_node(pos,{name="myuno:red"})
+				minetest.set_node(pos,{name="air"})
+				minetest.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name="myuno:red"})
+			return itemstack
 			elseif fields["blue"] then
-				minetest.set_node(pos,{name="myuno:blue"})
+				minetest.set_node(pos,{name="air"})
+				minetest.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name="myuno:blue"})
 			elseif fields["yellow"] then
-				minetest.set_node(pos,{name="myuno:yellow"})
+				minetest.set_node(pos,{name="air"})
+				minetest.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name="myuno:yellow"})
 			elseif fields["green"] then
-				minetest.set_node(pos,{name="myuno:green"})
+				minetest.set_node(pos,{name="air"})
+				minetest.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name="myuno:green"})
 			end
+		end
+		end)
+			itemstack:take_item()
+			return itemstack
 	end,
 	after_place_node = apn,
+	on_punch  = od,
 })
 
  minetest.register_node("myuno:deck",{
@@ -195,6 +230,7 @@ end,
 on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 local schem = minetest.get_modpath("myuno").."/schems/myuno.mts"
 	minetest.place_schematic({x=pos.x,y=pos.y,z=pos.z},schem,0, "air", true)
+	count = 0
 end,
 })
  minetest.register_node("myuno:placer",{
@@ -227,6 +263,7 @@ for i in ipairs(colcards) do
 	groups = {oddly_breakable_by_hand = 3,not_in_creative_inventory = nici,myuno=2},
 	selection_box = sbox1,
 	collision_box = sbox1,
+	after_place_node = apn,
+	on_punch   = od,
 })
 end
-
