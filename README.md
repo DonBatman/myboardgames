@@ -18,5 +18,13 @@ mypitfall - a simple parkour
 
 myuno - a card game
 
+mypachini - board/dice game
+
+mytrouble - board/dice game
+
+mypirinola - a top that tells you what to do
+
 There is no craft for these. Use /giveme or creative to get the placer block.
 Place the block and right click it. The schematic places to the north east.(+x,+z)
+
+For more information please view the topic on the forum. https://forum.minetest.net/viewtopic.php?f=9&t=13209
