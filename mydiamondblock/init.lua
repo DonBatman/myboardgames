@@ -1,6 +1,7 @@
 minetest.register_node("mydiamondblock:block",{
 	description = "My Diamond Block",
-	inventory_image = "mydiamondblock.png",
+	inventory_image = "mydiamondblock_inv.png",
+	wield_image = "mydiamondblock_inv.png",
 	tiles = {"mydiamondblock.png"},
 	drawtype = "normal",
 	paramtype = "light",

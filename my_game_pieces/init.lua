@@ -26,18 +26,16 @@ minetest.register_node("my_game_pieces:dice_"..d1,{
 		"my_game_pieces_"..i6..".png"},
 	drawtype = "normal",
 	paramtype = "light",
+	drop = "my_game_pieces:dice_3",
 	groups = {dig_immediate=3, not_in_creative_inventory=nici},
-after_place_node = function(pos, placer, itemstack, pointed_thing)
-	local timer = minetest.get_node_timer(pos)
-	local ran = math.random(1,6)
-	minetest.set_node(pos,{name="my_game_pieces:roll"})
-	   timer:start(2)
-end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		minetest.set_node(pos,{name="my_game_pieces:roll"})
+	end,
 
 })
 end
 minetest.register_node("my_game_pieces:roll",{
-	description = d3,
+	description = "Rolling",
 	tiles = {
 		{name="my_game_pieces_ani.png", animation={type="vertical_frames",aspect_w=16, aspect_h=16, length=0.3}},
 		{name="my_game_pieces_ani.png", animation={type="vertical_frames",aspect_w=16, aspect_h=16, length=0.3}},
@@ -48,13 +46,16 @@ minetest.register_node("my_game_pieces:roll",{
 		},
 	drawtype = "normal",
 	paramtype = "light",
+	drop = "my_game_pieces:dice_3",
 	groups = {dig_immediate=3, not_in_creative_inventory=1},
-
-on_timer = function(pos, elapsed)
-	local ran = math.random(1,6)
-	minetest.set_node(pos,{name="my_game_pieces:dice_"..ran})
-end
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		minetest.after(2, function()
+			local ran = math.random(1,6)
+			minetest.set_node(pos,{name="my_game_pieces:dice_"..ran})
+		end)
+	end,
 })
+
 local pieces = {
 	{"Red","red","^[colorize:red:120"},
 	{"Green","green","^[colorize:green:120"},

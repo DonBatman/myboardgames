@@ -223,6 +223,8 @@ end,
 })
  minetest.register_node("myuno:board",{
 	description = "My Uno",
+	inventory_image = "myuno_inv.png",
+	wield_image = "myuno_inv.png",
 	tiles = {"default_clay.png^bubble.png"},
 	drawtype = "normal",
 	paramtype = "light",
@@ -233,13 +235,14 @@ local schem = minetest.get_modpath("myuno").."/schems/myuno.mts"
 	count = 0
 end,
 })
+
  minetest.register_node("myuno:placer",{
 	description = "Placer",
 	tiles = {"default_clay.png"},
 	drawtype = "normal",
 	paramtype = "light",
 	drop = "",
-	groups = {cracky=3,not_in_creative_inventory = nici,myuno=1},
+	groups = {cracky=1,not_in_creative_inventory = nici,myuno=1},
 })
 
 local colcards = {

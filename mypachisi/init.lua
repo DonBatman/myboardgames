@@ -54,6 +54,7 @@ end
 minetest.register_node("mypachisi:placer",{
 	description = "Pachisi",
 	inventory_image = "mypachisi_inv.png",
+	wield_image = "mypachisi_inv.png",
 	tiles = {
 			"mypachisi_b2.png^mytrouble_o.png",
 			"mypachisi_b2.png",

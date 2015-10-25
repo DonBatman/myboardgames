@@ -35,6 +35,8 @@ minetest.register_node("mypirinola:piri_"..num, {
 end
 minetest.register_node("mypirinola:piri_spin", {
 	description = "Pirinola",
+	inventory_image = "mypirinola_inv.png",
+	wield_image = "mypirinola_inv.png",
 	drawtype = "mesh",
 	mesh = "mypirinola_oct.obj",
 	tiles = {

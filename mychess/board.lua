@@ -1,8 +1,8 @@
 
 minetest.register_node("mychess:board", {
-	description = "Chess Board",
-	inventory_image = "mychess_board_inven.png",
-	wield_image = "mychess_board_inven.png",
+	description = "Chesss",
+	inventory_image = "mychess_inv.png",
+	wield_image = "mychess_inv.png",
 	light_source = 5,
 	tiles = {"mychess_border_cbl.png","mychess_border.png","mychess_border_side.png","mychess_border_side.png","mychess_border_side.png","mychess_border_side.png"},
 	drawtype = "normal",

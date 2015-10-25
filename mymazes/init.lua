@@ -1,6 +1,7 @@
 minetest.register_node("mymazes:block1",{
 	description = "Maze 1",
 	inventory_image = "mymazes_1.png",
+	wield_image = "mymazes_1.png",
 	tiles = {"mymazes_1.png"},
 	drawtype = "normal",
 	paramtype = "light",
@@ -14,6 +15,7 @@ end,
 minetest.register_node("mymazes:block2",{
 	description = "Maze 2",
 	inventory_image = "mymazes_2.png",
+	wield_image = "mymazes_2.png",
 	tiles = {"mymazes_2.png"},
 	drawtype = "normal",
 	paramtype = "light",

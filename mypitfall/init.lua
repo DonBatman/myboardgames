@@ -1,5 +1,7 @@
 minetest.register_node("mypitfall:block",{
-	description = "Pitfall Game",
+	description = "Pitfall",
+	inventory_image = "mypitfall_inv.png",
+	wield_image = "mypitfall_inv.png",
 	tiles = {"default_dirt.png^mypitfall_reset.png"},
 	drawtype = "normal",
 	paramtype = "light",
@@ -31,7 +33,7 @@ minetest.register_node("mypitfall:swamp_water", {
 	liquid_range = 2,
 	damage_per_second = 5, 
 	post_effect_color = {a=180, r=25, g=40, b=1},
-	groups = {liquid=2},
+	groups = {liquid=2,not_in_creative_inventory=1},
 })
 minetest.register_node("mypitfall:swamp_water_flowing", {
 	description = "Flowing Swamp Water",

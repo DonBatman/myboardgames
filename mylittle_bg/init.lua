@@ -28,7 +28,7 @@ end,
 })
 end
 minetest.register_node("mylittle_bg:roll",{
-	description = d3,
+	description = "roll",
 	tiles = {
 		{name="mylittle_bg_ani.png", animation={type="vertical_frames",aspect_w=16, aspect_h=16, length=0.3}},
 		{name="mylittle_bg_ani.png", animation={type="vertical_frames",aspect_w=16, aspect_h=16, length=0.3}},
@@ -76,8 +76,9 @@ minetest.register_node("mylittle_bg:"..item,{
 end
 minetest.register_node("mylittle_bg:board",{
 	description = "Little Board Game",
-	inventory_image = "mylittle_bg_inven.png",
-	tiles = {"mylittle_bg_inven.png"},
+	inventory_image = "mylittle_bg_inv.png",
+	wield_image = "mylittle_bg_inv.png",
+	tiles = {"mylittle_bg_inv.png"},
 	drawtype = "normal",
 	paramtype = "light",
 	light_source = 8,

@@ -63,6 +63,7 @@ end
 minetest.register_node("mytrouble:placer",{
 	description = "Trouble",
 	inventory_image = "mytrouble_inv.png",
+	wield_image = "mytrouble_inv.png",
 	tiles = {
 			"default_clay.png^mytrouble_o.png"
 			},

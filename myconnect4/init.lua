@@ -117,6 +117,8 @@ minetest.register_node("myconnect4:back",{
 })
 minetest.register_node("myconnect4:reset",{
 	description = "Connect 4",
+	inventory_image = "myconnect4_inv.png",
+	wield_image = "myconnect4_inv.png",
 	tiles = {"default_sandstone.png^myconnect4_reset.png"},
 	drawtype = "normal",
 	paramtype = "light",

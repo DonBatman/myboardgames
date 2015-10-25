@@ -61,7 +61,8 @@ minetest.register_node("mys_n_l_mini:board_block"..num,{
 end
 minetest.register_node("mys_n_l_mini:placer",{
 	description = "Snakes and Ladders Mini",
-	inventory_image = "mys_n_l_base.png^mys_n_l_ladmid.png^mys_n_l_edgem.png",
+	inventory_image = "mys_n_l_mini_inv.png",
+	wield_image = "mys_n_l_mini_inv.png",
 	tiles = {
 			"mys_n_l_base.png^mys_n_l_ladmid.png^mys_n_l_edgem.png"
 			},

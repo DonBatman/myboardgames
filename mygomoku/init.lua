@@ -21,11 +21,13 @@ minetest.register_node("mygomoku:"..itm,{
 			},
 	paramtype2 = "facedir",
 	drop = "",
-	groups = {cracky=1},
+	groups = {cracky=3, not_in_creative_inventory = 1},
 })
 end
 minetest.register_node("mygomoku:placer",{
 	description = "Gomoku",
+	inventory_image = "mygomoku_inv.png",
+	wield_image = "mygomoku_inv.png",
 	tiles = {
 			"mygomoku_restart.png",
 			"mygomoku_blank.png",
@@ -116,7 +118,7 @@ minetest.register_node("mygomoku:stone_white_rf", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	drop = "mygomoku:stone_white",
-	groups = {cracky=3},
+	groups = {dig_immediate = 3,not_in_creative_inventory = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
