@@ -20,7 +20,8 @@ minetest.register_node("mygomoku:"..itm,{
 			"mygomoku_blank.png",
 			},
 	paramtype2 = "facedir",
-	groups = {cracky=3},
+	drop = "",
+	groups = {cracky=1},
 })
 end
 minetest.register_node("mygomoku:placer",{
@@ -45,15 +46,11 @@ minetest.register_node("mygomoku:stone_brown", {
 	description = "Stone Brown",
 	tiles = {
 		"mygomoku_blank.png^[colorize:brown:200",
-		"default_wood.png",
-		"default_wood.png",
-		"default_wood.png",
-		"default_wood.png",
-		"default_wood.png"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	groups = {cracky=3},
+	drop = "",
+	groups = {dig_immediate = 3,not_in_creative_inventory = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -70,15 +67,11 @@ minetest.register_node("mygomoku:stone_white", {
 	description = "Stone White",
 	tiles = {
 		"mygomoku_blank.png^[colorize:brown:100",
-		"default_wood.png",
-		"default_wood.png",
-		"default_wood.png",
-		"default_wood.png",
-		"default_wood.png"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	groups = {cracky=3},
+	drop = "",
+	groups = {dig_immediate = 3,not_in_creative_inventory = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -95,15 +88,11 @@ minetest.register_node("mygomoku:stone_brown_rf", {
 	description = "Stone Brown rf",
 	tiles = {
 		"mygomoku_blank.png^[colorize:brown:200",
-		"default_wood.png",
-		"default_wood.png",
-		"default_wood.png",
-		"default_wood.png",
-		"default_wood.png"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	groups = {cracky=3},
+	drop = "mygomoku:stone_brown",
+	groups = {dig_immediate = 3,not_in_creative_inventory = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -123,14 +112,10 @@ minetest.register_node("mygomoku:stone_white_rf", {
 	description = "Stone White rf",
 	tiles = {
 		"mygomoku_blank.png^[colorize:brown:100",
-		"default_wood.png",
-		"default_wood.png",
-		"default_wood.png",
-		"default_wood.png",
-		"default_wood.png"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
+	drop = "mygomoku:stone_white",
 	groups = {cracky=3},
 	node_box = {
 		type = "fixed",
