@@ -21,6 +21,7 @@ minetest.register_node("mygomoku:"..itm,{
 			},
 	paramtype2 = "facedir",
 	drop = "",
+	light_source = 5,
 	groups = {cracky=3, not_in_creative_inventory = 1},
 })
 end
@@ -38,16 +39,18 @@ minetest.register_node("mygomoku:placer",{
 			},
 	paramtype2 = "facedir",
 	groups = {cracky=3},
+	light_source = 5,
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 	local schem = minetest.get_modpath("mygomoku").."/schems/mygomoku.mts"
 	minetest.place_schematic(pos,schem,0, "air", true)
 end,
 })
 
-minetest.register_node("mygomoku:stone_brown", {
-	description = "Stone Brown",
+minetest.register_alias("mygomoku:stone_brown","mygomoku:stone_black")
+minetest.register_node("mygomoku:stone_black", {
+	description = "Black Go Stone",
 	tiles = {
-		"mygomoku_blank.png^[colorize:brown:200",
+		"default_obsidian.png^[colorize:#000:100",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -56,19 +59,21 @@ minetest.register_node("mygomoku:stone_brown", {
 	node_box = {
 		type = "fixed",
 		fixed = {
-			{-0.25, -0.5, -0.125, 0.25, -0.4375, 0.125},
-			{-0.125, -0.5, -0.25, 0.125, -0.4375, 0.25},
-			{-0.1875, -0.5, -0.1875, 0.1875, -0.4375, 0.1875},
-			{-0.125, -0.5, -0.125, 0.125, -0.375, 0.125},
-			{-0.0625, -0.5, -0.1875, 0.0625, -0.375, 0.1875},
-			{-0.1875, -0.5, -0.0625, 0.1875, -0.375, 0.0625},
+			{-0.45, -0.425, -0.225, 0.45, -0.35, 0.225}, 
+			{-0.225, -0.425, -0.45, 0.225,-0.35, 0.45},
+			{-0.3375, -0.425, -0.3375, 0.3375, -0.35, 0.3375}, 
+			{-0.225, -0.5, -0.225, 0.225, -0.275, 0.225}, 
+			{-0.1125,-0.5, -0.3375, 0.1125, -0.275, 0.3375}, 
+			{-0.3375,-0.5, -0.1125, 0.3375, -0.275, 0.1125},
 		}
-	}
+	},
+	buildable_to  = true,
+	light_source = 8,
 })
 minetest.register_node("mygomoku:stone_white", {
-	description = "Stone White",
+	description = "White Go Stone",
 	tiles = {
-		"mygomoku_blank.png^[colorize:brown:100",
+		"default_obsidian.png^[colorize:#fff:175",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -77,19 +82,22 @@ minetest.register_node("mygomoku:stone_white", {
 	node_box = {
 		type = "fixed",
 		fixed = {
-			{-0.25, -0.5, -0.125, 0.25, -0.4375, 0.125},
-			{-0.125, -0.5, -0.25, 0.125, -0.4375, 0.25},
-			{-0.1875, -0.5, -0.1875, 0.1875, -0.4375, 0.1875},
-			{-0.125, -0.5, -0.125, 0.125, -0.375, 0.125},
-			{-0.0625, -0.5, -0.1875, 0.0625, -0.375, 0.1875},
-			{-0.1875, -0.5, -0.0625, 0.1875, -0.375, 0.0625},
+			{-0.45, -0.425, -0.225, 0.45, -0.35, 0.225}, 
+			{-0.225, -0.425, -0.45, 0.225,-0.35, 0.45},
+			{-0.3375, -0.425, -0.3375, 0.3375, -0.35, 0.3375}, 
+			{-0.225, -0.5, -0.225, 0.225, -0.275, 0.225}, 
+			{-0.1125,-0.5, -0.3375, 0.1125, -0.275, 0.3375}, 
+			{-0.3375,-0.5, -0.1125, 0.3375, -0.275, 0.1125},
 		}
-	}
+	},
+	buildable_to  = true,
+	light_source = 8,
 })
-minetest.register_node("mygomoku:stone_brown_rf", {
-	description = "Stone Brown rf",
+minetest.register_alias("mygomoku:stone_brown_rf","mygomoku:stone_black_rf")
+minetest.register_node("mygomoku:stone_black_rf", {
+	description = "Black Go Stone rf",
 	tiles = {
-		"mygomoku_blank.png^[colorize:brown:200",
+		"default_obsidian.png^[colorize:#000:100",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -98,22 +106,27 @@ minetest.register_node("mygomoku:stone_brown_rf", {
 	node_box = {
 		type = "fixed",
 		fixed = {
-			{-0.25, -0.5, -0.125, 0.25, -0.4375, 0.125},
-			{-0.125, -0.5, -0.25, 0.125, -0.4375, 0.25},
-			{-0.1875, -0.5, -0.1875, 0.1875, -0.4375, 0.1875},
-			{-0.125, -0.5, -0.125, 0.125, -0.375, 0.125},
-			{-0.0625, -0.5, -0.1875, 0.0625, -0.375, 0.1875},
-			{-0.1875, -0.5, -0.0625, 0.1875, -0.375, 0.0625},
+			{-0.45, -0.5, -0.225, 0.45, 0, 0.225}, 
+			{-0.225, -0.5, -0.45, 0.225,0, 0.45},
+			{-0.3375, -0.5, -0.3375, 0.3375, 0, 0.3375}, 
+			{-0.225, -0.5, -0.225, 0.225, 0.1375, 0.225}, 
+			{-0.1125,-0.5, -0.3375, 0.1125, 0.1375, 0.3375}, 
+			{-0.3375,-0.5, -0.1125, 0.3375, 0.1375, 0.1125},
 		}
 	},
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.45, -0.5, -0.45, 0.45, 0.1375, 0.45}, 
+	},
+	light_source = 5,
 	after_destruct = function(pos, oldnode)
 	minetest.set_node(pos,{name="mygomoku:stone_brown_rf",param2=oldnode.param2})
 	end,
 })
 minetest.register_node("mygomoku:stone_white_rf", {
-	description = "Stone White rf",
+	description = "White Go Stone rf",
 	tiles = {
-		"mygomoku_blank.png^[colorize:brown:100",
+		"default_obsidian.png^[colorize:#fff:175",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -122,14 +135,19 @@ minetest.register_node("mygomoku:stone_white_rf", {
 	node_box = {
 		type = "fixed",
 		fixed = {
-			{-0.25, -0.5, -0.125, 0.25, -0.4375, 0.125},
-			{-0.125, -0.5, -0.25, 0.125, -0.4375, 0.25},
-			{-0.1875, -0.5, -0.1875, 0.1875, -0.4375, 0.1875},
-			{-0.125, -0.5, -0.125, 0.125, -0.375, 0.125},
-			{-0.0625, -0.5, -0.1875, 0.0625, -0.375, 0.1875},
-			{-0.1875, -0.5, -0.0625, 0.1875, -0.375, 0.0625},
+			{-0.45, -0.5, -0.225, 0.45, 0, 0.225}, 
+			{-0.225, -0.5, -0.45, 0.225,0, 0.45},
+			{-0.3375, -0.5, -0.3375, 0.3375, 0, 0.3375}, 
+			{-0.225, -0.5, -0.225, 0.225, 0.1375, 0.225}, 
+			{-0.1125,-0.5, -0.3375, 0.1125, 0.1375, 0.3375}, 
+			{-0.3375,-0.5, -0.1125, 0.3375, 0.1375, 0.1125},
 		}
 	},
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.45, -0.5, -0.45, 0.45, 0.1375, 0.45}, 
+	},
+	light_source = 5,
 	after_destruct = function(pos, oldnode)
 	minetest.set_node(pos,{name="mygomoku:stone_white_rf",param2=oldnode.param2})
 	end,
