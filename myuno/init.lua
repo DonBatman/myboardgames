@@ -229,11 +229,18 @@ end,
 	drawtype = "normal",
 	paramtype = "light",
 	groups = {oddly_breakable_by_hand = 1},
-on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-local schem = minetest.get_modpath("myuno").."/schems/myuno.mts"
-	minetest.place_schematic({x=pos.x,y=pos.y,z=pos.z},schem,0, "air", true)
-	count = 0
-end,
+	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+	local schem = minetest.get_modpath("myuno").."/schems/myuno.mts"
+		minetest.place_schematic({x=pos.x,y=pos.y,z=pos.z},schem,0, "air", true)
+		count = 0
+	end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		if placer and minetest.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
+		else
+			minetest.remove_node(pos)
+			return true
+		end
+	end,
 })
 
  minetest.register_node("myuno:placer",{

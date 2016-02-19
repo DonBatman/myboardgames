@@ -41,9 +41,16 @@ minetest.register_node("mygomoku:placer",{
 	groups = {cracky=3},
 	light_source = 5,
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-	local schem = minetest.get_modpath("mygomoku").."/schems/mygomoku.mts"
-	minetest.place_schematic(pos,schem,0, "air", true)
-end,
+		local schem = minetest.get_modpath("mygomoku").."/schems/mygomoku.mts"
+		minetest.place_schematic(pos,schem,0, "air", true)
+	end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		if placer and minetest.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
+		else
+			minetest.remove_node(pos)
+			return true
+		end
+	end,
 })
 
 minetest.register_alias("mygomoku:stone_brown","mygomoku:stone_black")

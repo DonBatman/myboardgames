@@ -10,11 +10,17 @@ minetest.register_node("mychess:board", {
 	groups = {cracky = 3},
 	sounds = default.node_sound_stone_defaults(),
 
-on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-local schem = minetest.get_modpath("mychess").."/schems/mychessboard.mts"
-	minetest.place_schematic({x=pos.x,y=pos.y,z=pos.z},schem,0, "air", true)
-end,
-
+	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+	local schem = minetest.get_modpath("mychess").."/schems/mychessboard.mts"
+		minetest.place_schematic({x=pos.x,y=pos.y,z=pos.z},schem,0, "air", true)
+	end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		if placer and minetest.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
+		else
+			minetest.remove_node(pos)
+			return true
+		end
+	end,
 })
 
 
