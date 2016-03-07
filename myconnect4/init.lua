@@ -124,8 +124,15 @@ minetest.register_node("myconnect4:reset",{
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=1},
-on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-local schem = minetest.get_modpath("myconnect4").."/schems/myconnect4.mts"
-	minetest.place_schematic({x=pos.x,y=pos.y,z=pos.z},schem,0, "air", true)
-end,
+	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+	local schem = minetest.get_modpath("myconnect4").."/schems/myconnect4.mts"
+		minetest.place_schematic({x=pos.x,y=pos.y,z=pos.z},schem,0, "air", true)
+	end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		if placer and minetest.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
+		else
+			minetest.remove_node(pos)
+			return true
+		end
+	end,
 })
