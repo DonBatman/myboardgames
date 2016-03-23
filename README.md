@@ -30,3 +30,6 @@ Place the block and right click it. The schematic places to the north east.(+x,+
 For more information please view the topic on the forum. https://forum.minetest.net/viewtopic.php?f=9&t=13209
 
 The privilege myboardgames is required to place any of the game placing nodes, by default this is granted to singleplayer, to change that modify the mycanadiancheckers/init.lua file and change give_to_single_player = true to false.
+
+
+Licence - DWYWPL
