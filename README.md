@@ -32,4 +32,4 @@ For more information please view the topic on the forum. https://forum.minetest.
 The privilege myboardgames is required to place any of the game placing nodes, by default this is granted to singleplayer, to change that modify the mycanadiancheckers/init.lua file and change give_to_single_player = true to false.
 
 
-Licence - DWYWPL
+Licence - MIT
