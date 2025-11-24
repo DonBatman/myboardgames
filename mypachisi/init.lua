@@ -14,7 +14,7 @@ local desc = dots[i][1]
 local col = dots[i][2]
 local img = dots[i][3]
 
-minetest.register_node("mypachisi:dot_"..col,{
+core.register_node("mypachisi:dot_"..col,{
 	description = desc.." Dot",
 	tiles = {img},
 	drawtype = "normal",
@@ -34,7 +34,7 @@ local desc = pieces[i][1]
 local item = pieces[i][2]
 local col  = pieces[i][3]
 
-minetest.register_node("mypachisi:"..item,{
+core.register_node("mypachisi:"..item,{
 	description = desc.." Player",
 	tiles = {"default_gravel.png"..col},
 	drawtype = "nodebox",
@@ -51,7 +51,7 @@ minetest.register_node("mypachisi:"..item,{
 	}
 })
 end
-minetest.register_node("mypachisi:placer",{
+core.register_node("mypachisi:placer",{
 	description = "Pachisi",
 	inventory_image = "mypachisi_inv.png",
 	wield_image = "mypachisi_inv.png",
@@ -68,15 +68,15 @@ minetest.register_node("mypachisi:placer",{
 	paramtype2 = "facedir",
 	groups = {cracky=3},
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-	local schem = minetest.get_modpath("mypachisi").."/schems/mypachisi.mts"
-		minetest.place_schematic(pos,schem,0, "air", true)
+	local schem = core.get_modpath("mypachisi").."/schems/mypachisi.mts"
+		core.place_schematic(pos,schem,0, "air", true)
 	end,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		if placer and minetest.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
+		if placer and core.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
 		else
-			minetest.remove_node(pos)
+			core.remove_node(pos)
 			return true
 		end
 	end,
 })
-dofile(minetest.get_modpath("mypachisi").."/dice.lua")
+dofile(core.get_modpath("mypachisi").."/dice.lua")
