@@ -18,7 +18,7 @@ local des = piri[i][1]
 local num = piri[i][2]
 local nic = piri[i][3]
 
-minetest.register_node("mypirinola:piri_"..num, {
+core.register_node("mypirinola:piri_"..num, {
 	description = "Pirinola "..des,
 	drawtype = "mesh",
 	mesh = "mypirinola_oct.obj",
@@ -28,12 +28,12 @@ minetest.register_node("mypirinola:piri_"..num, {
 	drop = "mypirinola:piri_spin",
 	groups = {choppy=2, dig_immediate=3, not_in_creative_inventory=nic},
 	--sounds = default.node_sound_wood_defaults(),
-	--on_place = minetest.rotate_node,
+	--on_place = core.rotate_node,
 	collision_box = cbox,
 	selection_box = cbox,
 })
 end
-minetest.register_node("mypirinola:piri_spin", {
+core.register_node("mypirinola:piri_spin", {
 	description = "Pirinola",
 	inventory_image = "mypirinola_inv.png",
 	wield_image = "mypirinola_inv.png",
@@ -52,8 +52,8 @@ minetest.register_node("mypirinola:piri_spin", {
 		local ran = math.random(1,6)
 		local parn = {5,7,9,11,12,14,16,18}
 		local par2 = parn[ math.random( #parn ) ]
-		minetest.after(3, function()
-		minetest.set_node(pos,{name="mypirinola:piri_"..ran, param2=par2})
+		core.after(3, function()
+		core.set_node(pos,{name="mypirinola:piri_"..ran, param2=par2})
 		end)
 	end,
 })
