@@ -11,7 +11,7 @@ local d1 = dice [i][1]
 local d2 = dice [i][2]
 local d3 = dice [i][3]
 
-minetest.register_node(d1,{
+core.register_node(d1,{
 	description = d3,
 	tiles = d2,
 	drawtype = "normal",
@@ -19,15 +19,15 @@ minetest.register_node(d1,{
 	groups = {cracky = 3, not_in_creative_inventory=1},
 
 on_punch = function(pos, node, puncher, pointed_thing)
-	local timer = minetest.get_node_timer(pos)
+	local timer = core.get_node_timer(pos)
 	local ran = math.random(1,6)
-	minetest.set_node(pos,{name="mylittle_bg:roll"})
+	core.set_node(pos,{name="mylittle_bg:roll"})
 	   timer:start(2)
 end,
 
 })
 end
-minetest.register_node("mylittle_bg:roll",{
+core.register_node("mylittle_bg:roll",{
 	description = "roll",
 	tiles = {
 		{name="mylittle_bg_ani.png", animation={type="vertical_frames",aspect_w=16, aspect_h=16, length=0.3}},
@@ -43,7 +43,7 @@ minetest.register_node("mylittle_bg:roll",{
 
 on_timer = function(pos, elapsed)
 	local ran = math.random(1,6)
-	minetest.set_node(pos,{name="mylittle_bg:"..ran})
+	core.set_node(pos,{name="mylittle_bg:"..ran})
 end
 })
 local pieces = {
@@ -57,7 +57,7 @@ local desc = pieces[i][1]
 local item = pieces[i][2]
 local col  = pieces[i][3]
 
-minetest.register_node("mylittle_bg:"..item,{
+core.register_node("mylittle_bg:"..item,{
 	description = desc.." Player",
 	tiles = {"default_gravel.png"..col},
 	drawtype = "nodebox",
@@ -74,7 +74,7 @@ minetest.register_node("mylittle_bg:"..item,{
 	}
 })
 end
-minetest.register_node("mylittle_bg:board",{
+core.register_node("mylittle_bg:board",{
 	description = "Little Board Game",
 	inventory_image = "mylittle_bg_inv.png",
 	wield_image = "mylittle_bg_inv.png",
@@ -84,13 +84,13 @@ minetest.register_node("mylittle_bg:board",{
 	light_source = 8,
 	groups = {cracky = 1},
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-	local schem = minetest.get_modpath("mylittle_bg").."/schems/my_little_bg.mts"
-		minetest.place_schematic({x=pos.x,y=pos.y-2,z=pos.z},schem,0, "air", true)
+	local schem = core.get_modpath("mylittle_bg").."/schems/my_little_bg.mts"
+		core.place_schematic({x=pos.x,y=pos.y-1,z=pos.z},schem,0, "air", true)
 	end,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		if placer and minetest.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
+		if placer and core.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
 		else
-			minetest.remove_node(pos)
+			core.remove_node(pos)
 			return true
 		end
 	end,
@@ -106,7 +106,7 @@ local desc = signs[i][1]
 local item = signs[i][2]
 local col  = signs[i][3]
 
-minetest.register_node("mylittle_bg:sign"..desc,{
+core.register_node("mylittle_bg:sign"..desc,{
 	description = "sign"..desc,
 	tiles = {"mylittle_bg_sign"..desc..".png"},
 	drawtype = "nodebox",
