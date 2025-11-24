@@ -16,7 +16,7 @@ local i5 = dice [i][6]
 local i6 = dice [i][7]
 local nici = dice [i][8]
 
-minetest.register_node("my_game_pieces:dice_"..d1,{
+core.register_node("my_game_pieces:dice_"..d1,{
 	description = "Dice",
 	tiles = {"my_game_pieces_"..i1..".png",
 		"my_game_pieces_"..i2..".png",
@@ -27,14 +27,17 @@ minetest.register_node("my_game_pieces:dice_"..d1,{
 	drawtype = "normal",
 	paramtype = "light",
 	drop = "my_game_pieces:dice_3",
-	groups = {dig_immediate=3, not_in_creative_inventory=nici},
-	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		minetest.set_node(pos,{name="my_game_pieces:roll"})
+	groups = {cracky = 3, not_in_creative_inventory=nici},
+	on_punch = function(pos, node, puncher, pointed_thing)
+		local timer = core.get_node_timer(pos)
+		local ran = math.random(1,6)
+		core.set_node(pos,{name="my_game_pieces:roll"})
+	   	timer:start(2)
 	end,
 
 })
 end
-minetest.register_node("my_game_pieces:roll",{
+core.register_node("my_game_pieces:roll",{
 	description = "Rolling",
 	tiles = {
 		{name="my_game_pieces_ani.png", animation={type="vertical_frames",aspect_w=16, aspect_h=16, length=0.3}},
@@ -47,13 +50,11 @@ minetest.register_node("my_game_pieces:roll",{
 	drawtype = "normal",
 	paramtype = "light",
 	drop = "my_game_pieces:dice_3",
-	groups = {dig_immediate=3, not_in_creative_inventory=1},
-	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		minetest.after(2, function()
-			local ran = math.random(1,6)
-			minetest.set_node(pos,{name="my_game_pieces:dice_"..ran})
-		end)
-	end,
+	groups = {cracky = 3, not_in_creative_inventory=1},
+	on_timer = function(pos, elapsed)
+		local ran = math.random(1,6)
+		core.set_node(pos,{name="my_game_pieces:dice_"..ran})
+	end
 })
 
 local pieces = {
@@ -70,7 +71,7 @@ local desc = pieces[i][1]
 local item = pieces[i][2]
 local col  = pieces[i][3]
 
-minetest.register_node("my_game_pieces:"..item,{
+core.register_node("my_game_pieces:"..item,{
 	description = desc.." Player",
 	tiles = {"default_gravel.png"..col},
 	drawtype = "nodebox",
