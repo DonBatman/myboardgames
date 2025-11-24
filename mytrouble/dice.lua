@@ -11,7 +11,7 @@ local d1 = dice [i][1]
 local d2 = dice [i][2]
 local d3 = dice [i][3]
 
-minetest.register_node(d1,{
+core.register_node(d1,{
 	description = d3,
 	tiles = d2,
 	drawtype = "normal",
@@ -19,15 +19,15 @@ minetest.register_node(d1,{
 	groups = {cracky = 1, not_in_creative_inventory=1},
 
 on_punch = function(pos, node, puncher, pointed_thing)
-	local timer = minetest.get_node_timer(pos)
+	local timer = core.get_node_timer(pos)
 	local ran = math.random(1,6)
-	minetest.set_node(pos,{name="mytrouble:roll"})
+	core.set_node(pos,{name="mytrouble:roll"})
 	   timer:start(2)
 end,
 
 })
 end
-minetest.register_node("mytrouble:roll",{
+core.register_node("mytrouble:roll",{
 	description = "roll",
 	tiles = {
 		{name="mylittle_bg_ani.png", animation={type="vertical_frames",aspect_w=16, aspect_h=16, length=0.3}},
@@ -43,6 +43,6 @@ minetest.register_node("mytrouble:roll",{
 
 on_timer = function(pos, elapsed)
 	local ran = math.random(1,6)
-	minetest.set_node(pos,{name="mytrouble:"..ran})
+	core.set_node(pos,{name="mytrouble:"..ran})
 end
 })
