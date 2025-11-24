@@ -1,6 +1,6 @@
 
 
-minetest.register_node("myconnect4:front",{
+core.register_node("myconnect4:front",{
 	description = "front",
 	tiles = {"default_sand.png"},
 	drawtype = "nodebox",
@@ -27,7 +27,7 @@ minetest.register_node("myconnect4:front",{
 		}
 	},
 })
-minetest.register_node("myconnect4:red",{
+core.register_node("myconnect4:red",{
 	description = "Red",
 	tiles = {"myconnect4_red.png"},
 	drawtype = "nodebox",
@@ -42,7 +42,7 @@ minetest.register_node("myconnect4:red",{
 		}
 	}
 })
-minetest.register_node("myconnect4:black",{
+core.register_node("myconnect4:black",{
 	description = "Black",
 	tiles = {"myconnect4_black.png"},
 	drawtype = "nodebox",
@@ -57,7 +57,7 @@ minetest.register_node("myconnect4:black",{
 		}
 	}
 })
-minetest.register_node("myconnect4:redrf",{
+core.register_node("myconnect4:redrf",{
 	description = "redrf",
 	tiles = {"myconnect4_red.png"},
 	drawtype = "nodebox",
@@ -73,10 +73,10 @@ minetest.register_node("myconnect4:redrf",{
 		}
 	},
 after_destruct = function(pos, oldnode)
-	minetest.set_node(pos,{name="myconnect4:redrf",param2=oldnode.param2})
+	core.set_node(pos,{name="myconnect4:redrf",param2=oldnode.param2})
 end
 })
-minetest.register_node("myconnect4:blackrf",{
+core.register_node("myconnect4:blackrf",{
 	description = "blackrf",
 	tiles = {"myconnect4_black.png"},
 	drawtype = "nodebox",
@@ -92,10 +92,10 @@ minetest.register_node("myconnect4:blackrf",{
 		}
 	},
 after_destruct = function(pos, oldnode)
-	minetest.set_node(pos,{name="myconnect4:blackrf",param2=oldnode.param2})
+	core.set_node(pos,{name="myconnect4:blackrf",param2=oldnode.param2})
 end
 })
-minetest.register_node("myconnect4:back",{
+core.register_node("myconnect4:back",{
 	description = "back",
 	tiles = {"wool_grey.png"},
 	drawtype = "nodebox",
@@ -115,7 +115,7 @@ minetest.register_node("myconnect4:back",{
 		}
 	},
 })
-minetest.register_node("myconnect4:reset",{
+core.register_node("myconnect4:reset",{
 	description = "Connect 4",
 	inventory_image = "myconnect4_inv.png",
 	wield_image = "myconnect4_inv.png",
@@ -125,13 +125,13 @@ minetest.register_node("myconnect4:reset",{
 	paramtype2 = "facedir",
 	groups = {cracky=1},
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-	local schem = minetest.get_modpath("myconnect4").."/schems/myconnect4.mts"
-		minetest.place_schematic({x=pos.x,y=pos.y,z=pos.z},schem,0, "air", true)
+	local schem = core.get_modpath("myconnect4").."/schems/myconnect4.mts"
+		core.place_schematic({x=pos.x,y=pos.y,z=pos.z},schem,0, "air", true)
 	end,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		if placer and minetest.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
+		if placer and core.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
 		else
-			minetest.remove_node(pos)
+			core.remove_node(pos)
 			return true
 		end
 	end,
