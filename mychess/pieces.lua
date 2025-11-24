@@ -166,7 +166,7 @@ local img = peices[i][4]
 local nbox = peices[i][5]
 local sbox = peices[i][6]
 
-minetest.register_node(item, {
+core.register_node(item, {
 	description = desc,
 	inventory_image = inv,
 	light_source = 7,
@@ -180,49 +180,49 @@ minetest.register_node(item, {
 	selection_box = sbox,
 
 	after_place_node = function(pos)
-		local node = minetest.get_node(pos)
+		local node = core.get_node(pos)
 		if node.name == "mychess:king_white" then
-		minetest.set_node({x = pos.x, y = pos.y + 1, z = pos.z},{name = "mychess:king_top_white"})
+		core.set_node({x = pos.x, y = pos.y + 1, z = pos.z},{name = "mychess:king_top_white"})
 		elseif node.name == "mychess:king_black" then
-		minetest.set_node({x = pos.x, y = pos.y + 1, z = pos.z},{name = "mychess:king_top_black"})
+		core.set_node({x = pos.x, y = pos.y + 1, z = pos.z},{name = "mychess:king_top_black"})
 		elseif node.name == "mychess:queen_white" then
-		minetest.set_node({x = pos.x, y = pos.y + 1, z = pos.z},{name = "mychess:queen_top_white"})
+		core.set_node({x = pos.x, y = pos.y + 1, z = pos.z},{name = "mychess:queen_top_white"})
 		elseif node.name == "mychess:queen_black" then
-		minetest.set_node({x = pos.x, y = pos.y + 1, z = pos.z},{name = "mychess:queen_top_black"})
+		core.set_node({x = pos.x, y = pos.y + 1, z = pos.z},{name = "mychess:queen_top_black"})
 		end
 
 	end,
 	on_destruct = function(pos)
 		local pos2 = {x=pos.x,y=pos.y+1,z=pos.z}
-		local node = minetest.get_node(pos)
-		local node2 = minetest.get_node(pos2)
+		local node = core.get_node(pos)
+		local node2 = core.get_node(pos2)
 		if node.name == "mychess:king_white" then
-			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
+			core.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
 		elseif node.name == "mychess:king_black" then
-			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
+			core.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
 		elseif node.name == "mychess:queen_white" then
-			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
+			core.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
 		elseif node.name == "mychess:queen_black" then
-			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
+			core.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
 		elseif node.name == "mychess:king_top_white" then
-			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
+			core.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
 		elseif node.name == "mychess:king_top_black" then
-			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
+			core.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
 		elseif node.name == "mychess:queen_top_white" then
-			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
+			core.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
 		elseif node.name == "mychess:queen_top_black" then
-			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
+			core.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
 		end
 	end,
 
     on_place = function(itemstack, placer, pointed_thing)
         local pos = pointed_thing.above
-        if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name ~= "air" then
-            minetest.chat_send_player( placer:get_player_name(), "Not enough vertical space to place it here!" )
+        if core.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name ~= "air" then
+            core.chat_send_player( placer:get_player_name(), "Not enough vertical space to place it here!" )
             return
         end
 
-        return minetest.item_place(itemstack, placer, pointed_thing)
+        return core.item_place(itemstack, placer, pointed_thing)
     end
 })
 end
@@ -246,7 +246,7 @@ local inv = peices[i][3]
 local img = peices[i][4]
 local nbox = peices[i][5]
 
-minetest.register_node(item, {
+core.register_node(item, {
 	description = desc,
 --	inventory_image = inv,
 	light_source = 7,
@@ -261,11 +261,11 @@ minetest.register_node(item, {
 
     on_place = function(itemstack, placer, pointed_thing)
         local pos = pointed_thing.above
-        if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name ~= "air" then
-            minetest.chat_send_player( placer:get_player_name(), "Not enough vertical space to place it here!" )
+        if core.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name ~= "air" then
+            core.chat_send_player( placer:get_player_name(), "Not enough vertical space to place it here!" )
             return
         end
-		local node = minetest.get_node(pos)
+		local node = core.get_node(pos)
 		local par1 = node.param2
 		par2 = par1 + 2
 			if par2 == 4 then
@@ -274,10 +274,10 @@ minetest.register_node(item, {
 			par2 = 1
 			end
 		if node.name == "mychess:knight_black" then
-		minetest.set_node({pos},{name = "mychess:knight_black", param2 = par2})
+		core.set_node({pos},{name = "mychess:knight_black", param2 = par2})
 		end
 
-        return minetest.item_place(itemstack, placer, pointed_thing)
+        return core.item_place(itemstack, placer, pointed_thing)
     end
 })
 end

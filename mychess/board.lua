@@ -1,5 +1,5 @@
 
-minetest.register_node("mychess:board", {
+core.register_node("mychess:board", {
 	description = "Chesss",
 	inventory_image = "mychess_inv.png",
 	wield_image = "mychess_inv.png",
@@ -11,13 +11,13 @@ minetest.register_node("mychess:board", {
 	sounds = default.node_sound_stone_defaults(),
 
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-	local schem = minetest.get_modpath("mychess").."/schems/mychessboard.mts"
-		minetest.place_schematic({x=pos.x,y=pos.y,z=pos.z},schem,0, "air", true)
+	local schem = core.get_modpath("mychess").."/schems/mychessboard.mts"
+		core.place_schematic({x=pos.x,y=pos.y,z=pos.z},schem,0, "air", true)
 	end,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		if placer and minetest.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
+		if placer and core.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
 		else
-			minetest.remove_node(pos)
+			core.remove_node(pos)
 			return true
 		end
 	end,
@@ -79,7 +79,7 @@ for i in ipairs (board) do
 local item = board[i][1]
 local img = board[i][2]
 
-minetest.register_node(item, {
+core.register_node(item, {
 	description = item,
 	light_source = 5,
 	tiles = img,
@@ -94,30 +94,30 @@ end
 -- Punch on Turn------------------------------------------
 
 local function update_node(pos, node) 
-	minetest.set_node(pos, node)
+	core.set_node(pos, node)
 end
 
 local function punch(pos)
-	local meta = minetest.get_meta(pos)
+	local meta = core.get_meta(pos)
 	local state = meta:get_int("state")
-	local me = minetest.get_node(pos)
+	local me = core.get_node(pos)
 	local tmp_node
 	local tmp_node2
 	oben = {x=pos.x, y=pos.y, z=pos.z}
 		if state == 1 then
 			state = 0
-			minetest.sound_play("mychess_ding", {pos = pos, gain = 0.3, max_hear_distance = 10})
+			core.sound_play("mychess_ding", {pos = pos, gain = 0.3, max_hear_distance = 10})
 			tmp_node = {name="mychess:turnwhite", param1=me.param1, param2=me.param2}
 		else
 			state = 1
-			minetest.sound_play("mychess_ding", {pos = pos, gain = 0.3, max_hear_distance = 10})
+			core.sound_play("mychess_ding", {pos = pos, gain = 0.3, max_hear_distance = 10})
 			tmp_node = {name="mychess:turnblack", param1=me.param1, param2=me.param2}
 		end
 		update_node(pos, tmp_node)
 		meta:set_int("state", state)
 end
 
-minetest.register_node("mychess:turnblack", {
+core.register_node("mychess:turnblack", {
 	light_source = 5,
 	tiles = {"mychess_bbutton.png"},
 	drawtype = "normal",
@@ -130,7 +130,7 @@ minetest.register_node("mychess:turnblack", {
 
 })
 
-minetest.register_node("mychess:turnwhite", {
+core.register_node("mychess:turnwhite", {
 	light_source = 5,
 	tiles = {"mychess_wbutton.png"},
 	drawtype = "normal",
@@ -143,7 +143,7 @@ minetest.register_node("mychess:turnwhite", {
 
 })
 
-minetest.register_node("mychess:stand", {
+core.register_node("mychess:stand", {
 	tiles = {
 		"mychess_beige.png",
 		"mychess_beige.png",
