@@ -3,36 +3,36 @@ local lastcard = nil
 local rplayers = {}
 
 local function inform_near_players(pos, msg)
-	for _,player in pairs(minetest.get_objects_inside_radius(pos, 10)) do
+	for _,player in pairs(core.get_objects_inside_radius(pos, 10)) do
 		if player:is_player() then
-			minetest.chat_send_player(player:get_player_name(), msg)
+			core.chat_send_player(player:get_player_name(), msg)
 		end
 	end
 end
 
 function apn(pos, placer, itemstack)
-	local grop = minetest.get_item_group(minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name, "myuno")
+	local grop = core.get_item_group(core.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name, "myuno")
 	if grop > 3 then
 		return
 	end
 	
 	local name = placer:get_player_name()
 	if grop == 0 then
-		minetest.chat_send_player(name, "You can not place a card there!")
-		minetest.remove_node(pos)
+		core.chat_send_player(name, "You can not place a card there!")
+		core.remove_node(pos)
 		return itemstack
 	end
 
-	local node = minetest.get_node(pos)
-	local nodeu = minetest.get_node({x=pos.x,y=pos.y-1,z=pos.z})
-	local descr = minetest.registered_items[node.name].description
+	local node = core.get_node(pos)
+	local nodeu = core.get_node({x=pos.x,y=pos.y-1,z=pos.z})
+	local descr = core.registered_items[node.name].description
 	if grop == 1 then
 		inform_near_players(pos, name.." placed a "..descr)
 		return
 	end
 	lastcard = nodeu.name
-	minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z}, node)
-	minetest.remove_node(pos)
+	core.set_node({x=pos.x, y=pos.y-1, z=pos.z}, node)
+	core.remove_node(pos)
 	if grop == 3 then
 		return itemstack
 	end
@@ -44,9 +44,9 @@ function apn(pos, placer, itemstack)
 end
 
 function od(pos, node, player, pointed_thing)
-	local node = minetest.get_node(pos)
+	local node = core.get_node(pos)
 	local nn = node.name
-	local nodeu = minetest.get_node({x=pos.x,y=pos.y-1,z=pos.z})
+	local nodeu = core.get_node({x=pos.x,y=pos.y-1,z=pos.z})
 	local inv = player:get_inventory()
 	local lc = lastcard
 	print(nn)
@@ -54,7 +54,7 @@ function od(pos, node, player, pointed_thing)
 	
 	if lastcard ~= nil then
 		inv:add_item("main",nn)
-		minetest.set_node(pos, {name = lc})
+		core.set_node(pos, {name = lc})
 		lastcard = nil
 	else
 	return
@@ -117,7 +117,7 @@ else
 	desc2 = desc
 end	
 
-minetest.register_node("myuno:"..itm,{
+core.register_node("myuno:"..itm,{
 	description = desc2,
 	inventory_image = "myuno_color.png"..col.."^myuno_white.png^myuno_"..nimg..".png",
 	tiles = {"myuno_color.png"..col.."^myuno_white.png^myuno_"..nimg..".png"},
@@ -137,7 +137,7 @@ minetest.register_node("myuno:"..itm,{
 end
 end
 end
- minetest.register_node("myuno:col",{
+ core.register_node("myuno:col",{
 	description = "Any Color ",
 	inventory_image = "myuno_col.png",
 	tiles = {"myuno_card.png^myuno_col.png"},
@@ -151,29 +151,29 @@ end
 	collision_box = sbox1,
 	on_place = 	function(itemstack, placer, pointed_thing)
 	local pos = pointed_thing.above
-	local node = minetest.get_node(pos)
-	local meta = minetest.get_meta(pos)
-		minetest.show_formspec(placer:get_player_name(),"cform",
+	local node = core.get_node(pos)
+	local meta = core.get_meta(pos)
+		core.show_formspec(placer:get_player_name(),"cform",
 				"size[4,4;]"..
 				"image_button_exit[0,0;2,2;myuno_form_red.png;red; ]"..
 				"image_button_exit[2,0;2,2;myuno_form_yellow.png;yellow; ]"..
 				"image_button_exit[0,2;2,2;myuno_form_blue.png;blue; ]"..
 				"image_button_exit[2,2;2,2;myuno_form_green.png;green; ]")
-		minetest.register_on_player_receive_fields(function(player, formname, fields)
+		core.register_on_player_receive_fields(function(player, formname, fields)
 		if formname == "cform" then
 			if fields["red"] then
-				minetest.set_node(pos,{name="air"})
-				minetest.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name="myuno:red"})
+				core.set_node(pos,{name="air"})
+				core.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name="myuno:red"})
 			return itemstack
 			elseif fields["blue"] then
-				minetest.set_node(pos,{name="air"})
-				minetest.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name="myuno:blue"})
+				core.set_node(pos,{name="air"})
+				core.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name="myuno:blue"})
 			elseif fields["yellow"] then
-				minetest.set_node(pos,{name="air"})
-				minetest.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name="myuno:yellow"})
+				core.set_node(pos,{name="air"})
+				core.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name="myuno:yellow"})
 			elseif fields["green"] then
-				minetest.set_node(pos,{name="air"})
-				minetest.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name="myuno:green"})
+				core.set_node(pos,{name="air"})
+				core.set_node({x=pos.x,y=pos.y-1,z=pos.z},{name="myuno:green"})
 			end
 		end
 		end)
@@ -184,7 +184,7 @@ end
 	on_punch  = od,
 })
 
- minetest.register_node("myuno:deck",{
+ core.register_node("myuno:deck",{
 	description = "Uno Card Deck",
 	tiles = {"myuno_deck.png"},
 	drawtype = "mesh",
@@ -208,20 +208,20 @@ on_punch = function(pos, node, puncher, pointed_thing)
 		and inv:room_for_item("main", "myuno:col 1") then
 			inv:add_item("main", "myuno:col 1")
 		else
-			minetest.add_item(pos, item)
+			core.add_item(pos, item)
 		end
 	else
 		if inv
 		and inv:room_for_item("main", card) then
 			inv:add_item("main", card)
 		else
-			minetest.add_item(pos, item)
+			core.add_item(pos, item)
 		end
 	end
 end,
 	
 })
- minetest.register_node("myuno:board",{
+ core.register_node("myuno:board",{
 	description = "My Uno",
 	inventory_image = "myuno_inv.png",
 	wield_image = "myuno_inv.png",
@@ -230,20 +230,20 @@ end,
 	paramtype = "light",
 	groups = {oddly_breakable_by_hand = 1},
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-	local schem = minetest.get_modpath("myuno").."/schems/myuno.mts"
-		minetest.place_schematic({x=pos.x,y=pos.y,z=pos.z},schem,0, "air", true)
+	local schem = core.get_modpath("myuno").."/schems/myuno.mts"
+		core.place_schematic({x=pos.x,y=pos.y,z=pos.z},schem,0, "air", true)
 		count = 0
 	end,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		if placer and minetest.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
+		if placer and core.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
 		else
-			minetest.remove_node(pos)
+			core.remove_node(pos)
 			return true
 		end
 	end,
 })
 
- minetest.register_node("myuno:placer",{
+ core.register_node("myuno:placer",{
 	description = "Placer",
 	tiles = {"default_clay.png"},
 	drawtype = "normal",
@@ -262,7 +262,7 @@ for i in ipairs(colcards) do
 	local desc = colcards[i][1]
 	local itm = colcards[i][2]
 
- minetest.register_node("myuno:"..itm,{
+ core.register_node("myuno:"..itm,{
 	description = desc,
 	tiles = {"myuno_"..itm..".png"},
 	drawtype = "mesh",
