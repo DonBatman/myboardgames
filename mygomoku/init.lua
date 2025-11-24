@@ -9,7 +9,7 @@ for i in ipairs(board) do
 local itm = board[i][1]
 local des = board[i][2]
 
-minetest.register_node("mygomoku:"..itm,{
+core.register_node("mygomoku:"..itm,{
 	description = des,
 	tiles = {
 			"mygomoku_"..itm..".png",
@@ -25,7 +25,7 @@ minetest.register_node("mygomoku:"..itm,{
 	groups = {cracky=3, not_in_creative_inventory = 1},
 })
 end
-minetest.register_node("mygomoku:placer",{
+core.register_node("mygomoku:placer",{
 	description = "Gomoku",
 	inventory_image = "mygomoku_inv.png",
 	wield_image = "mygomoku_inv.png",
@@ -41,20 +41,20 @@ minetest.register_node("mygomoku:placer",{
 	groups = {cracky=3},
 	light_source = 5,
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-		local schem = minetest.get_modpath("mygomoku").."/schems/mygomoku.mts"
-		minetest.place_schematic(pos,schem,0, "air", true)
+		local schem = core.get_modpath("mygomoku").."/schems/mygomoku.mts"
+		core.place_schematic(pos,schem,0, "air", true)
 	end,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		if placer and minetest.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
+		if placer and core.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
 		else
-			minetest.remove_node(pos)
+			core.remove_node(pos)
 			return true
 		end
 	end,
 })
 
-minetest.register_alias("mygomoku:stone_brown","mygomoku:stone_black")
-minetest.register_node("mygomoku:stone_black", {
+core.register_alias("mygomoku:stone_brown","mygomoku:stone_black")
+core.register_node("mygomoku:stone_black", {
 	description = "Black Go Stone",
 	tiles = {
 		"default_obsidian.png^[colorize:#000:100",
@@ -77,7 +77,7 @@ minetest.register_node("mygomoku:stone_black", {
 	buildable_to  = true,
 	light_source = 8,
 })
-minetest.register_node("mygomoku:stone_white", {
+core.register_node("mygomoku:stone_white", {
 	description = "White Go Stone",
 	tiles = {
 		"default_obsidian.png^[colorize:#fff:175",
@@ -100,8 +100,8 @@ minetest.register_node("mygomoku:stone_white", {
 	buildable_to  = true,
 	light_source = 8,
 })
-minetest.register_alias("mygomoku:stone_brown_rf","mygomoku:stone_black_rf")
-minetest.register_node("mygomoku:stone_black_rf", {
+core.register_alias("mygomoku:stone_brown_rf","mygomoku:stone_black_rf")
+core.register_node("mygomoku:stone_black_rf", {
 	description = "Black Go Stone rf",
 	tiles = {
 		"default_obsidian.png^[colorize:#000:100",
@@ -127,10 +127,10 @@ minetest.register_node("mygomoku:stone_black_rf", {
 	},
 	light_source = 5,
 	after_destruct = function(pos, oldnode)
-	minetest.set_node(pos,{name="mygomoku:stone_brown_rf",param2=oldnode.param2})
+	core.set_node(pos,{name="mygomoku:stone_brown_rf",param2=oldnode.param2})
 	end,
 })
-minetest.register_node("mygomoku:stone_white_rf", {
+core.register_node("mygomoku:stone_white_rf", {
 	description = "White Go Stone rf",
 	tiles = {
 		"default_obsidian.png^[colorize:#fff:175",
@@ -156,6 +156,6 @@ minetest.register_node("mygomoku:stone_white_rf", {
 	},
 	light_source = 5,
 	after_destruct = function(pos, oldnode)
-	minetest.set_node(pos,{name="mygomoku:stone_white_rf",param2=oldnode.param2})
+	core.set_node(pos,{name="mygomoku:stone_white_rf",param2=oldnode.param2})
 	end,
 })
