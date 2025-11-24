@@ -1,4 +1,4 @@
-minetest.register_node("mypitfall:block",{
+core.register_node("mypitfall:block",{
 	description = "Pitfall",
 	inventory_image = "mypitfall_inv.png",
 	wield_image = "mypitfall_inv.png",
@@ -8,20 +8,20 @@ minetest.register_node("mypitfall:block",{
 	light_source = 8,
 	groups = {cracky = 1},
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-	local schem = minetest.get_modpath("mypitfall").."/schems/mypitfall1.mts"
-		minetest.place_schematic({x=pos.x,y=pos.y-9,z=pos.z},schem,0, "air", true)
+	local schem = core.get_modpath("mypitfall").."/schems/mypitfall1.mts"
+		core.place_schematic({x=pos.x,y=pos.y-9,z=pos.z},schem,0, "air", true)
 	end,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		if placer and minetest.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
+		if placer and core.check_player_privs(placer:get_player_name(), {myboardgames = true}) then
 		else
-			minetest.remove_node(pos)
+			core.remove_node(pos)
 			return true
 		end
 	end,
 })
-minetest.register_node("mypitfall:swamp_water", {
+core.register_node("mypitfall:swamp_water", {
 	description = "Swamp Water",
-	inventory_image = minetest.inventorycube("mypitfall_swamp_water_inv.png"),
+	inventory_image = core.inventorycube("mypitfall_swamp_water_inv.png"),
 	drawtype = "liquid",
 	tiles = {"mypitfall_swamp_water.png", },
 	alpha = 240,
@@ -42,9 +42,9 @@ minetest.register_node("mypitfall:swamp_water", {
 	post_effect_color = {a=180, r=25, g=40, b=1},
 	groups = {liquid=2,not_in_creative_inventory=1},
 })
-minetest.register_node("mypitfall:swamp_water_flowing", {
+core.register_node("mypitfall:swamp_water_flowing", {
 	description = "Flowing Swamp Water",
-	inventory_image = minetest.inventorycube("mypitfall_swamp_water_inv.png"),
+	inventory_image = core.inventorycube("mypitfall_swamp_water_inv.png"),
 	drawtype = "flowingliquid",
 	tiles = {"mypitfall_swamp_water.png"},
 	special_tiles = {"mypitfall_swamp_water.png"},
