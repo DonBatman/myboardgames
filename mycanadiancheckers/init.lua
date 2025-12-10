@@ -100,33 +100,36 @@ core.register_node("mycanadiancheckers:redp_c", {
 	description = "Red Crown",
 	light_source = 5,
 	tiles = {"default_acacia_wood.png"},
-	drawtype = "nodebox",
+	drawtype = "mesh",
+	mesh = "myboardgames_checker_crown.obj",
 	paramtype = "light",
-	drop = "mycanadiancheckers:redp 2",
+	drop = "mycanadiancheckers:redp_c",
 	sunlight_propagates = true,
 	groups = {cracky = 1, dig_immediate=3,not_in_creative_inventory=1},
-	node_box = crown,
+	selection_box = crown,
 })
 core.register_node("mycanadiancheckers:blackp_c", {
 	description = "Black Crown",
 	light_source = 5,
 	tiles = {"default_obsidian.png"},
-	drawtype = "nodebox",
+	drawtype = "mesh",
+	mesh = "myboardgames_checker_crown.obj",
 	paramtype = "light",
-	drop = "mycanadiancheckers:blackp 2",
+	drop = "mycanadiancheckers:blackp_c",
 	sunlight_propagates = true,
 	groups = {cracky = 1, dig_immediate=3,not_in_creative_inventory=1},
-	node_box = crown,
+	selection_box = crown,
 })
 core.register_node("mycanadiancheckers:blackp", {
 	description = "Black Piece",
 	light_source = 5,
 	tiles = {"default_obsidian.png"},
-	drawtype = "nodebox",
+	drawtype = "mesh",
+	mesh = "myboardgames_checker.obj",
 	paramtype = "light",
 	sunlight_propagates = true,
 	groups = {cracky = 1, dig_immediate=3,not_in_creative_inventory=1},
-	node_box = regp,
+	selection_box = regp,
 after_place_node = function(pos, placer, itemstack, pointed_thing)
 	local node = core.get_node(pos)
 	local nodeu = core.get_node({x=pos.x,y=pos.y-1,z=pos.z})
@@ -144,11 +147,12 @@ core.register_node("mycanadiancheckers:redp", {
 	description = "Red Piece",
 	light_source = 5,
 	tiles = {"default_acacia_wood.png"},
-	drawtype = "nodebox",
+	drawtype = "mesh",
+	mesh = "myboardgames_checker.obj",
 	paramtype = "light",
 	sunlight_propagates = true,
 	groups = {cracky = 1, dig_immediate=3,not_in_creative_inventory=1},
-	node_box = regp,
+	selection_box = regp,
 after_place_node = function(pos, placer, itemstack, pointed_thing)
 	local node = core.get_node(pos)
 	local nodeu = core.get_node({x=pos.x,y=pos.y-1,z=pos.z})

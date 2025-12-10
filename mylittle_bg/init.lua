@@ -60,7 +60,8 @@ local col  = pieces[i][3]
 core.register_node("mylittle_bg:"..item,{
 	description = desc.." Player",
 	tiles = {"default_gravel.png"..col},
-	drawtype = "nodebox",
+	drawtype = "mesh",
+	mesh = "mylittle_bg_piece.obj",
 	paramtype = "light",
 	light_source = 11,
 	groups = {cracky = 1, dig_immediate=3, not_in_creative_inventory=1},

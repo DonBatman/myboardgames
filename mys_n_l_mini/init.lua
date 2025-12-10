@@ -96,11 +96,12 @@ local col  = pieces[i][3]
 core.register_node("mys_n_l_mini:"..item,{
 	description = desc.." Player",
 	tiles = {"default_gravel.png"..col},
-	drawtype = "nodebox",
+	drawtype = "mesh",
+	mesh = "mys_n_l_piece.obj",
 	paramtype = "light",
 	light_source = 11,
 	groups = {cracky = 1, dig_immediate=3, not_in_creative_inventory=1},
-	node_box = {
+	selection_box = {
 		type = "fixed",
 		fixed = {
 			{-0.3125, -0.5, -0.3125, 0.3125, -0.3125, 0.3125},

@@ -59,7 +59,8 @@ core.register_node("mygomoku:stone_black", {
 	tiles = {
 		"default_obsidian.png^[colorize:#000:100",
 	},
-	drawtype = "nodebox",
+	drawtype = "mesh",
+	mesh = "mygomoku_stone.obj",
 	paramtype = "light",
 	drop = "",
 	groups = {dig_immediate = 3,not_in_creative_inventory = 1},
@@ -82,7 +83,8 @@ core.register_node("mygomoku:stone_white", {
 	tiles = {
 		"default_obsidian.png^[colorize:#fff:175",
 	},
-	drawtype = "nodebox",
+	drawtype = "mesh",
+	mesh = "mygomoku_stone.obj",
 	paramtype = "light",
 	drop = "",
 	groups = {dig_immediate = 3,not_in_creative_inventory = 1},
@@ -106,7 +108,8 @@ core.register_node("mygomoku:stone_black_rf", {
 	tiles = {
 		"default_obsidian.png^[colorize:#000:100",
 	},
-	drawtype = "nodebox",
+	drawtype = "mesh",
+	mesh = "mygomoku_stone.obj",
 	paramtype = "light",
 	drop = "mygomoku:stone_brown",
 	groups = {dig_immediate = 3,not_in_creative_inventory = 1},
@@ -135,7 +138,8 @@ core.register_node("mygomoku:stone_white_rf", {
 	tiles = {
 		"default_obsidian.png^[colorize:#fff:175",
 	},
-	drawtype = "nodebox",
+	drawtype = "mesh",
+	mesh = "mygomoku_stone.obj",
 	paramtype = "light",
 	drop = "mygomoku:stone_white",
 	groups = {dig_immediate = 3,not_in_creative_inventory = 1},

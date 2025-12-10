@@ -30,11 +30,12 @@ core.register_node("myconnect4:front",{
 core.register_node("myconnect4:red",{
 	description = "Red",
 	tiles = {"myconnect4_red.png"},
-	drawtype = "nodebox",
+	drawtype = "mesh",
+	mesh = "myconnect4_piece.obj",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=3,dig_immediate=3,falling_node=1,not_in_creative_inventory=1},
-	node_box = {
+	selection_box = {
 		type = "fixed",
 		fixed = {
 			{-0.375, -0.5, -0.3125, 0.375, 0.5, -0.5},
@@ -45,11 +46,12 @@ core.register_node("myconnect4:red",{
 core.register_node("myconnect4:black",{
 	description = "Black",
 	tiles = {"myconnect4_black.png"},
-	drawtype = "nodebox",
+	drawtype = "mesh",
+	mesh = "myconnect4_piece.obj",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=3,dig_immediate=3,falling_node=1,not_in_creative_inventory=1},
-	node_box = {
+	selection_box = {
 		type = "fixed",
 		fixed = {
 			{-0.375, -0.5, -0.3125, 0.375, 0.5, -0.5},
@@ -60,12 +62,13 @@ core.register_node("myconnect4:black",{
 core.register_node("myconnect4:redrf",{
 	description = "redrf",
 	tiles = {"myconnect4_red.png"},
-	drawtype = "nodebox",
+	drawtype = "mesh",
+	mesh = "myconnect4_piece.obj",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	drop = "myconnect4:red",
 	groups = {cracky=3,dig_immediate=3,falling_node=1,not_in_creative_inventory=1},
-	node_box = {
+	selection_box = {
 		type = "fixed",
 		fixed = {
 			{-0.375, -0.5, -0.3125, 0.375, 0.5, -0.5},
@@ -79,12 +82,13 @@ end
 core.register_node("myconnect4:blackrf",{
 	description = "blackrf",
 	tiles = {"myconnect4_black.png"},
-	drawtype = "nodebox",
+	drawtype = "mesh",
+	mesh = "myconnect4_piece.obj",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	drop = "myconnect4:black",
 	groups = {cracky=3,dig_immediate=3,falling_node=1,not_in_creative_inventory=1},
-	node_box = {
+	selection_box = {
 		type = "fixed",
 		fixed = {
 			{-0.375, -0.5, -0.3125, 0.375, 0.5, -0.5},
